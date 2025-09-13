@@ -1,0 +1,18 @@
+# Compiled files
+*.class
+
+# Package directories
+bin/
+out/
+target/
+
+# IDE files
+.idea/
+.vscode/
+.settings/
+.classpath
+.project
+
+# Local configuration and data
+
+*.db
