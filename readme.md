@@ -21,6 +21,7 @@ Este é um sistema em Java para gerenciar e conectar alunos a vagas de estágio 
 
 A estrutura do projeto segue as convenções de pacotes do Java para melhor organização e modularidade:
 
+```
 Sys_IC/
 ├── src/
 │   └──├── model/      # Classes de entidades (Aluno, Vaga, Usuario, etc.)
@@ -31,6 +32,7 @@ Sys_IC/
 └── lib/
 └── sqlite-jdbc-3.50.3.0.jar  # Driver JDBC do SQLite
 
+```
 ### 🚀 Como Usar
 
 #### Pré-requisitos
