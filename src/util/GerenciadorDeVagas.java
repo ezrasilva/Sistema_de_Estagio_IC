@@ -4,13 +4,12 @@ import java.util.List;
 
 import src.model.Vaga;
 
-// Classe para implementar o padrão de projeto Singleton (requisito 3l)
 class GerenciadorDeVagas {
     private static GerenciadorDeVagas instance;
     private List<Vaga> vagas;
 
     private GerenciadorDeVagas() {
-        this.vagas = new ArrayList<>(); // ArrayList (requisito 3f)
+        this.vagas = new ArrayList<>(); 
     }
 
     public static GerenciadorDeVagas getInstance() {
