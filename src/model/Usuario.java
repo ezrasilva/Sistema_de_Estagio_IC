@@ -35,7 +35,7 @@ public abstract class Usuario implements Serializable {
         return email;
     }
     
-    // Métodos abstratos (requisito 3d)
+    // Métodos abstratos 
     public abstract void exibirPerfil();
     public abstract String getTipo();
 }
