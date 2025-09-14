@@ -19,11 +19,9 @@ import src.model.Usuario;
 import src.model.Vaga;
 import src.util.FiltroDeBusca;
 
-// Classe principal do sistema (requisito 3a)
 public class SistemaClassificados {
 
-    // Variável constante (requisito 3c)
-    public static final String[] TIPOS_DE_USUARIO_ACEITOS = {"Aluno", "Empresa", "Professor"}; // Array simples (requisito 3f)
+    public static final String[] TIPOS_DE_USUARIO_ACEITOS = {"Aluno", "Empresa", "Professor"}; 
 
     private static UsuarioDAO usuarioDAO;
     private static VagaDAO vagaDAO;
@@ -34,7 +32,6 @@ public class SistemaClassificados {
     private static Usuario usuarioLogado = null;
 
     public static void main(String[] args) {
-        // Inicializa a conexão com o banco de dados e os DAOs
         
         try {
             ConexaoSQLite conexao = new ConexaoSQLite();
@@ -55,7 +52,6 @@ public class SistemaClassificados {
         } catch (SQLException e) {
             System.err.println("Erro ao conectar com o banco de dados: " + e.getMessage());
         } finally {
-            // Fecha a conexão do banco de dados ao sair
             if (connection != null) {
                 try {
                     connection.close();
@@ -238,7 +234,7 @@ public class SistemaClassificados {
 
         List<Vaga> vagasFiltradas = new ArrayList<>();
         try {
-            List<Vaga> todasAsVagas = vagaDAO.listarTodas(usuarioDAO); // Passa o usuarioDAO
+            List<Vaga> todasAsVagas = vagaDAO.listarTodas(usuarioDAO); 
             switch (opcao) {
                 case "1":
                     vagasFiltradas = todasAsVagas;
