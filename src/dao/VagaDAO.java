@@ -11,7 +11,7 @@ import src.model.Publicavel;
 import src.model.TipoVaga;
 import src.model.Vaga;
 
-import java.sql.Timestamp; // Importe a classe Timestamp
+import java.sql.Timestamp; 
 
 public class VagaDAO {
     private Connection connection;
@@ -29,7 +29,7 @@ public class VagaDAO {
                      "tipo VARCHAR(50) NOT NULL," +
                      "id_publicador INTEGER NOT NULL," +
                      "ativa BOOLEAN NOT NULL," +
-                     "data_criacao DATETIME NOT NULL," + // Adicionada a coluna data_criacao
+                     "data_criacao DATETIME NOT NULL," +
                      "FOREIGN KEY (id_publicador) REFERENCES usuarios(id));";
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
@@ -39,7 +39,6 @@ public class VagaDAO {
     }
 
     public void inserir(Vaga vaga) throws SQLException {
-        // Incluída a coluna 'data_criacao' no INSERT
         String sql = "INSERT INTO vagas (titulo, descricao, tipo, id_publicador, ativa, data_criacao) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, vaga.getTitulo());
@@ -51,7 +50,7 @@ public class VagaDAO {
                 stmt.setNull(4, java.sql.Types.INTEGER);
             }
             stmt.setBoolean(5, vaga.isAtiva());
-            stmt.setTimestamp(6, new Timestamp(vaga.getDataCriacao().getTime())); // Salva a data
+            stmt.setTimestamp(6, new Timestamp(vaga.getDataCriacao().getTime())); 
             stmt.executeUpdate();
 
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
@@ -64,7 +63,6 @@ public class VagaDAO {
 
     public List<Vaga> listarTodas(UsuarioDAO usuarioDAO) throws SQLException {
         List<Vaga> vagas = new ArrayList<>();
-        // Incluída a coluna 'data_criacao' no SELECT
         String sql = "SELECT id, titulo, descricao, tipo, id_publicador, ativa, data_criacao FROM vagas";
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -76,8 +74,7 @@ public class VagaDAO {
                 vaga.setDescricao(rs.getString("descricao"));
                 vaga.setTipo(TipoVaga.valueOf(rs.getString("tipo")));
                 vaga.setAtiva(rs.getBoolean("ativa"));
-                vaga.setDataCriacao(rs.getTimestamp("data_criacao")); // Recupera a data
-
+                vaga.setDataCriacao(rs.getTimestamp("data_criacao")); 
                 int publicadorId = rs.getInt("id_publicador");
                 if (!rs.wasNull()) {
                     vaga.setPublicador((Publicavel) usuarioDAO.buscarPorId(publicadorId));
@@ -90,7 +87,6 @@ public class VagaDAO {
 
     public List<Vaga> listarPorPublicadorId(int publicadorId, UsuarioDAO usuarioDAO) throws SQLException {
         List<Vaga> vagas = new ArrayList<>();
-        // Incluída a coluna 'data_criacao' no SELECT
         String sql = "SELECT id, titulo, descricao, tipo, id_publicador, ativa, data_criacao FROM vagas WHERE id_publicador = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, publicadorId);
@@ -102,7 +98,7 @@ public class VagaDAO {
                     vaga.setDescricao(rs.getString("descricao"));
                     vaga.setTipo(TipoVaga.valueOf(rs.getString("tipo")));
                     vaga.setAtiva(rs.getBoolean("ativa"));
-                    vaga.setDataCriacao(rs.getTimestamp("data_criacao")); // Recupera a data
+                    vaga.setDataCriacao(rs.getTimestamp("data_criacao")); 
                     vaga.setPublicador((Publicavel) usuarioDAO.buscarPorId(publicadorId));
                     vagas.add(vaga);
                 }
@@ -112,7 +108,6 @@ public class VagaDAO {
     }
     
     public Vaga buscarPorId(int id, UsuarioDAO usuarioDAO) throws SQLException {
-        // Incluída a coluna 'data_criacao' no SELECT
         String sql = "SELECT id, titulo, descricao, tipo, id_publicador, ativa, data_criacao FROM vagas WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -124,7 +119,7 @@ public class VagaDAO {
                     vaga.setDescricao(rs.getString("descricao"));
                     vaga.setTipo(TipoVaga.valueOf(rs.getString("tipo")));
                     vaga.setAtiva(rs.getBoolean("ativa"));
-                    vaga.setDataCriacao(rs.getTimestamp("data_criacao")); // Recupera a data
+                    vaga.setDataCriacao(rs.getTimestamp("data_criacao"));
 
                     int publicadorId = rs.getInt("id_publicador");
                     if (!rs.wasNull()) {
@@ -145,7 +140,7 @@ public class VagaDAO {
             stmt.setString(3, vaga.getTipo().toString());
             stmt.setInt(4, vaga.getPublicador().getId());
             stmt.setBoolean(5, vaga.isAtiva());
-            stmt.setTimestamp(6, new Timestamp(vaga.getDataCriacao().getTime())); // Salva a data
+            stmt.setTimestamp(6, new Timestamp(vaga.getDataCriacao().getTime())); 
             stmt.setInt(7, vaga.getId());
             stmt.executeUpdate();
         }
