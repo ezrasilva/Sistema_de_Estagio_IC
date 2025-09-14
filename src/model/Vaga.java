@@ -13,14 +13,12 @@ public class Vaga implements Serializable {
     private boolean ativa;
     private Date dataCriacao;
 
-    // Variável constante (requisito 3c)
     public static final String NOME_SISTEMA = "Conecta UFPA";
 
     public Vaga() {
-        // Construtor vazio para o VagaDAO
+        // Construtor vazio
     }
 
-    // Construtor (requisito 3i - composição)
     public Vaga(String titulo, String descricao, TipoVaga tipo, Publicavel publicador) {
         this.titulo = titulo;
         this.descricao = descricao;
@@ -83,12 +81,10 @@ public class Vaga implements Serializable {
         return dataCriacao;
     }
 
-    // Adicionado o setter para a data de criação
     public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
-    // Métodos
     public void exibirDetalhes() {
         System.out.println("--- Detalhes da Vaga ---");
         System.out.println("Título: " + this.titulo);
